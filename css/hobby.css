@@ -50,10 +50,27 @@ body{
 
 /* ----------header--------- */
 
+.header{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.nav,
+.nav-list,
+.nav-connection-list{
+    display: flex;
+}
+
+.nav{
+    align-items: center;
+}
+
 .logo{
     display: flex;
     align-items: center;
     justify-content: center;
+
+    margin-right: 100px;
 
     width: 160px;
     color: #eeaeca;
@@ -67,6 +84,8 @@ body{
     background-color: #fff;
     padding: 10px 15px;
     border-radius: 50%;
+
+    transition: box-shadow 250ms linear;
 }
 
 .logo:hover,
@@ -76,4 +95,64 @@ body{
 
 .lia{
     color: #8dbef7;
+}
+
+.nav-list{
+    gap: 20px;
+    margin-right: auto;
+}
+
+.nav-item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 40px;
+    height: 40px;
+
+    transition-property: width, height, background-color,border-radius;
+    transition: 250ms linear;
+}
+
+.nav-item:hover{
+    width: 40px;
+    height: 40px;
+
+    background-color: #fff;
+    border-radius: 50%;
+}
+
+.nav-item:hover .nav-link{
+    fill:#eeaeca
+}
+
+.nav-link{
+    fill:#fff;
+
+    transition: fill 250ms linear;
+}
+
+.nav-connection-list{
+    gap: 20px;
+}
+
+.nav-connection-link{
+    text-decoration: none;
+
+    padding: 20px 10px;
+
+    color: black;
+
+    transition: background-color 250ms linear,
+    border-radius 250ms linear;
+}
+
+.nav-connection-link:hover{
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.nav-connection-svg{
+    margin-right: 20px;
+    fill: currentColor;
 }
