@@ -80,6 +80,61 @@
           </button>
         </div>
       </section>
+      <section>
+        <div class="container">
+          <button type="button" class="modal-open" data-modal-open>
+            Модальне вікно
+          </button>
+        </div>
+      </section>
     </main>
+    <div class="backdrop is-hidden" data-modal>
+      <div class="modal">
+        <form class="modal-form">
+          <div class="modal-field">
+            <input
+              type="text"
+              name="user-name"
+              id="name"
+              class="modal-input"
+              placeholder=" "
+            />
+            <label for="name" class="modal-label">Ваше імя</label>
+          </div>
+          <div class="modal-field">
+            <input
+              type="tel"
+              name="user-tel"
+              id="tel"
+              class="modal-input"
+              placeholder="тут обов`язково пробіл"
+            />
+            <label for="tel" class="modal-label">Ваш телефон</label>
+          </div>
+          <div class="modal-field">
+            <input
+              type="email"
+              name="user-email"
+              id="email"
+              class="modal-input"
+              placeholder=" "
+            />
+            <label for="email" class="modal-label">Ваша пошта</label>
+          </div>
+          <button type="submit">Відправити</button>
+        </form>
+        <div class="modal-icon-close">
+          <svg
+            class="modal-icon-svg"
+            width="18px"
+            height="18px"
+            data-modal-close
+          >
+            <use href="./image/icons.svg#icon-close-black"></use>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <script src="./js/modal.js"></script>
   </body>
 </html>
