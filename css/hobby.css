@@ -53,6 +53,19 @@ body{
     padding-bottom: 100px;
 }
 
+.visually-hidden {
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    border: 0;
+    padding: 0;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    margin: -1px;
+}
+
 /* ----------header--------- */
 
 .header{
@@ -366,6 +379,59 @@ body{
     background 250ms linear;
 }
 
+.modal-radio-title{
+    margin-bottom: 15px;
+}
+
+.modal-group{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.modal-lable-radio{
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    font-size: 16px;
+    color: #222222;
+}
+
+.modal-lable-radio::before{
+    content: '';
+
+    width: 40px;
+    height: 22px;
+    border: 1px solid #444444;
+    border-radius: 50px;
+    margin-right: 10px;
+
+    transition: background-color 250ms linear;
+}
+
+.modal-lable-radio::after{
+    content: '';
+
+    position: absolute;
+    left: 3px;
+    top: 2px;
+    width: 18px;
+    height: 18px;
+    background-color: #cccccc;
+    border-radius: 50%;
+    transition: transform 250ms linear,
+    background-color 250ms linear;
+}
+
+.modal-input-radio:checked + .modal-lable-radio::after{
+    transform: translate(16px);
+    background-color: #fff;
+}
+
+.modal-input-radio:checked+.modal-lable-radio::before{
+    background-color:#8dbef7;
+}
 
 .modal-icon-close:hover .modal-icon-svg,
 .modal-icon-close:focus .modal-icon-svg {
