@@ -1,17 +1,22 @@
-const apartment = {
-  imgUrl: "https://via.placeholder.com/640x480",
-  descr: "Spacious apartment in the city center",
-  rating: 4,
-  price: 2153,
-  tags: ["premium", "promoted", "top"],
-  owner: {
-    name: "Henry",
-    phone: "982-126-1588",
-    email: "henry.carter@aptmail.com",
-  },
-};
-  apartment.price = 5000;
-  apartment.rating = 4.7;
-  apartment.tags.push("trusted");
-apartment.name = "Henry Sibola";
-  
+const numbers = [1, 5, 6, 2, 3, 4];
+let counter = 0;
+for (let loop = 1; loop < numbers.length - 2; loop += 1) {
+  let wasCandgedElement = false;
+  // console.table(loop);
+  let chandgeElement = false;
+  for (let i = 1; i < numbers.length - loop; i += 1) {
+    // console.log(numbers[i]);
+    let firstElement = numbers[i - 1];
+    let secondElement = numbers[i];
+    // console.log(firstElement, secondElement);
+    if (firstElement > secondElement) {
+      wasCandgedElement = true;
+      firstElement = numbers[i];
+      secondElement = numbers[i - 1];
+    }
+    counter += 1;
+  }
+  if (!wasCandgedElement) break;
+}
+console.log(counter);
+console.table(numbers);
