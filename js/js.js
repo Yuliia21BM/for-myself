@@ -101,3 +101,10 @@ console.log(newObj);
 // console.log(entries);
 // console.log(newArr);
 // }
+
+class Car {
+  constructor(speed) {
+    this.speed = speed;
+  }
+}
+const EV = new Car();
