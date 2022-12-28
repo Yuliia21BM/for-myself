@@ -35,53 +35,64 @@ const arr = [
   ,
   { id: "c", parentId: "a" },
   { id: "d", parentId: null },
-  { id: "e", parentId: "e" },
+  { id: "e", parentId: null },
   { id: "f", parentId: "b" },
   { id: "q", parentId: "b" },
   { id: "h", parentId: "e" },
+  { id: "j", parentId: "h" },
 ];
 
-const newObj = {};
-const newArr = [];
+// const arr = [
+//   { id: "a", parentId: "b" },
+//   { id: "b", parentId: null },
+//   { id: "c", parentId: "a" },
+//   { id: "d", parentId: null },
+//   { id: "e", parentId: "d" },
+// ];
 
-function SortArr(arr = []) {
-  arr.filter(({ id, parentId }) => {
-    if (id === parentId) {
-      newObj[id] = { id, parentId, [id]: { id, parentId } };
-    }
-    if (parentId === null || id === parentId) {
-      newObj[id] = { id, parentId };
+// const newObj = {};
+// const newArr = [];
 
-      arr
-        .filter((u) => id === u.parentId)
-        .forEach((line) => {
-          let ident = line.id;
-          newObj[id][ident] = line;
-        });
-    }
-  });
-  arr.filter(({ id, parentId }) => {
-    if (!Object.keys(newObj).includes(parentId) && parentId !== null) {
-      newArr.push({ id, parentId });
-    }
-  });
-  const objValues = Object.values(newObj);
-  checking(objValues);
-  function checking(arr) {
-    arr.forEach((val) => {
-      newArr.forEach(({ id, parentId }) => {
-        if (Object.keys(val).includes(parentId)) {
-          val[parentId][id] = { id, parentId };
-          newArr.splice({ id, parentId }, 1);
-        }
-      });
-    });
-    if (newArr.length > 0) checking(arr);
-  }
-}
-SortArr(arr);
+// function SortArr(arr = []) {
+//   arr.filter(({ id, parentId }) => {
+//     if (id === parentId) {
+//       newObj[id] = { id, parentId, [id]: { id, parentId } };
+//     }
+//     if (parentId === null || id === parentId) {
+//       newObj[id] = { id, parentId };
 
-console.log(newObj);
+//       arr
+//         .filter((u) => id === u.parentId)
+//         .forEach((line) => {
+//           let ident = line.id;
+//           newObj[id][ident] = line;
+//         });
+//     }
+//   });
+//   arr.filter(({ id, parentId }) => {
+//     if (!Object.keys(newObj).includes(parentId) && parentId !== null) {
+//       newArr.push({ id, parentId });
+//     }
+//   });
+//   const objValues = Object.values(newObj);
+//   checking(objValues);
+//   function checking(arr) {
+//     arr.forEach((val) => {
+//       newArr.forEach(({ id, parentId }) => {
+//         if (Object.keys(val).includes(parentId)) {
+//           val[parentId][id] = { id, parentId };
+//           newArr.splice({ id, parentId }, 1);
+//         }
+//       });
+//     });
+//     if (newArr.length > 0) checking(arr);
+//   }
+// }
+// SortArr(arr);
+
+// console.log(newObj);
+
+// ----------------------------------------------------------------------
 
 // if (newArr.length !== 0) {
 //   const entries = Object.entries(newObj);
@@ -102,29 +113,45 @@ console.log(newObj);
 // console.log(newArr);
 // }
 
-if (navigator.geolocation) {
-  navigator.geolocation.getCurrentPosition(
-    function (position) {
-      const { latitude } = position.coords;
-      const { longitude } = position.coords;
-      console.log(`https://www.google.com/maps/@${latitude},${longitude}`);
+// if (navigator.geolocation) {
+//   navigator.geolocation.getCurrentPosition(
+//     function (position) {
+//       const { latitude } = position.coords;
+//       const { longitude } = position.coords;
+//       console.log(`https://www.google.com/maps/@${latitude},${longitude}`);
 
-      const coords = [latitude, longitude];
+//       const coords = [latitude, longitude];
 
-      const map = L.map("map").setView(coords, 13);
+//       const map = L.map("map").setView(coords, 13);
 
-      L.tileLayer("https://tile.openstreetmap.fr/hot//{z}/{x}/{y}.png", {
-        attribution:
-          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      }).addTo(map);
+//       L.tileLayer("https://tile.openstreetmap.fr/hot//{z}/{x}/{y}.png", {
+//         attribution:
+//           '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+//       }).addTo(map);
 
-      L.marker(coords)
-        .addTo(map)
-        .bindPopup("A pretty CSS3 popup.<br> Easily customizable.")
-        .openPopup();
-    },
-    function () {
-      alert("Could not get your position");
-    }
-  );
-}
+//       L.marker(coords)
+//         .addTo(map)
+//         .bindPopup("A pretty CSS3 popup.<br> Easily customizable.")
+//         .openPopup();
+//     },
+//     function () {
+//       alert("Could not get your position");
+//     }
+//   );
+// }
+
+const getTree = (parent = {}, childs = arr) => {
+  const firstCall = childs === arr;
+  childs.forEach(({ id, parentId }) => {
+    if (firstCall && parentId) return;
+    parent[id] = { id, parentId };
+    const hasChilds = arr.some((item) => item.parentId === id);
+    if (hasChilds)
+      getTree(
+        parent[id],
+        arr.filter((item) => item.parentId === id)
+      );
+  });
+  return parent;
+};
+console.log(getTree());
